@@ -8,6 +8,7 @@ class ProductItem extends HTMLElement {
     
     const li = document.createElement('li');
     this.li = li;
+    li.setAttribute('class', 'product');
     const img = document.createElement('img');
     
     img.setAttribute('width',200);
@@ -24,6 +25,72 @@ class ProductItem extends HTMLElement {
     this.button = button;
     const style = document.createElement('style');
 
+    style.innerHTML = `.price {
+      color: green;
+      font-size: 1.8em;
+      font-weight: bold;
+      margin: 0;
+    }
+    
+    .product {
+      align-items: center;
+      background-color: white;
+      border-radius: 5px;
+      display: grid;
+      grid-template-areas: 
+      'image'
+      'title'
+      'price'
+      'add';
+      grid-template-rows: 67% 11% 11% 11%;
+      height: 450px;
+      filter: drop-shadow(0px 0px 6px rgb(0,0,0,0.2));
+      margin: 0 30px 30px 0;
+      padding: 10px 20px;
+      width: 200px;
+    }
+    
+    .product > button {
+      background-color: rgb(255, 208, 0);
+      border: none;
+      border-radius: 5px;
+      color: black;
+      justify-self: center;
+      max-height: 35px;
+      padding: 8px 20px;
+      transition: 0.1s ease all;
+    }
+    
+    .product > button:hover {
+      background-color: rgb(255, 166, 0);
+      cursor: pointer;
+      transition: 0.1s ease all;
+    }
+    
+    .product > img {
+      align-self: center;
+      justify-self: center;
+      width: 100%;
+    }
+    
+    .title {
+      font-size: 1.1em;
+      margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
+    .title:hover {
+      font-size: 1.1em;
+      margin: 0;
+      white-space: wrap;
+      overflow: auto;
+      text-overflow: unset;
+    }
+    `
+
+    
     shadow.appendChild(style);
     shadow.appendChild(li);
     li.appendChild(img);
@@ -34,16 +101,18 @@ class ProductItem extends HTMLElement {
   }
   addAttribute(item) {
     this.img.src = item.image;
-    
+  
     this.img.alt = item.title;
     this.p1.textContent = item.title;
     this.p2.textContent = item.price;
     // console.log(this.p1);
     this.button.setAttribute('onclick', 'alert(\'Added to Cart!\')' );
     this.button.textContent = 'Add to Cart';
+    this.button.setAttribute('id', item.id);
     this.button.on = true;
-    // console.log(this.button);
   }
+
+
   
 
   
