@@ -106,10 +106,11 @@ class ProductItem extends HTMLElement {
     this.p1.textContent = item.title;
     this.p2.textContent = item.price;
     // console.log(this.p1);
+    this.button.on = 'true';
     this.button.setAttribute('onclick', 'alert(\'Added to Cart!\')' );
     this.button.textContent = 'Add to Cart';
     this.button.setAttribute('id', item.id);
-    this.button.on = true;
+    
   }
 
 
