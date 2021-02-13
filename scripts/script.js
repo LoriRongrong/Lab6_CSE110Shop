@@ -1,7 +1,6 @@
 // Script.js
 
 window.addEventListener('DOMContentLoaded', () => {
-  
   // localStorage.clear();
   // load data 
   if (!localStorage.getItem('part2')) {
@@ -18,16 +17,15 @@ window.addEventListener('DOMContentLoaded', () => {
   let localCart = localStorage.getItem('localCart');
   localCart = localCart ? localCart.split(',') : [];
 
+  const count = document.getElementById('cart-count');
 
   // construct individual product given json file 
   JSON.parse(products).forEach((item) => {
-
     const product = document.createElement('product-item');
     product.addAttribute(item);
     productList.appendChild(product); 
     const bt = product.button;
-    const count = document.getElementById('cart-count');
-   
+    
     // set the count by previous localCart history
     count.textContent = localCart.length;
   
@@ -44,18 +42,15 @@ window.addEventListener('DOMContentLoaded', () => {
     // click button event
     bt.addEventListener('click', () => {
       // add item
-      if (bt.on=='true') {
+      if (bt.on ==='true') {
         bt.textContent = 'Remove from Cart';
         count.textContent = parseInt(count.textContent) + 1;
         bt.on = 'false';
         let idx = localCart.indexOf(bt.id);
         if (idx == -1) localCart.push(bt.id);
         localStorage.setItem('localCart', localCart.toString());
-        localStorage.setItem(bt.id, bt.on);
-      
-      }
-      // remove item 
-      else {
+        localStorage.setItem(bt.id, bt.on);      
+      } else if (bt.on === 'false') {  // remove item 
         bt.on = 'true';
         bt.textContent = 'Add to Cart';
         count.textContent = parseInt(count.textContent) - 1;
@@ -67,7 +62,5 @@ window.addEventListener('DOMContentLoaded', () => {
     
     }) 
   });
-  
   console.log(localCart);
-    
 });

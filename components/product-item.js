@@ -89,34 +89,32 @@ class ProductItem extends HTMLElement {
       text-overflow: unset;
     }
     `
-
-    
     shadow.appendChild(style);
     shadow.appendChild(li);
     li.appendChild(img);
     li.appendChild(p1);
     li.appendChild(p2);
     li.appendChild(button);
-    
   }
+
   addAttribute(item) {
     this.img.src = item.image;
   
     this.img.alt = item.title;
     this.p1.textContent = item.title;
-    this.p2.textContent = item.price;
-    // console.log(this.p1);
+    this.p2.textContent = `$${item.price}`;
     this.button.on = 'true';
-    this.button.setAttribute('onclick', 'alert(\'Added to Cart!\')' );
+    this.button.addEventListener('click', () => {
+      if (this.button.on === 'true') {
+        alert('Add to cart');
+      } else if (this.button.on === 'false') {
+        alert('Remove from cart');
+      }
+    });
     this.button.textContent = 'Add to Cart';
     this.button.setAttribute('id', item.id);
     
   }
-
-
-  
-
-  
 }
 
 customElements.define('product-item', ProductItem);
